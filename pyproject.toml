@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "discord-message-tracker"
+version = "0.1.0"
+description = ""
+authors = ["Ruslan Zinnatov <rh26157@gmail.com>"]
+readme = "README.md"
+packages = [{include = "discord_message_tracker"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
