@@ -8,6 +8,9 @@ packages = [{include = "discord_message_tracker"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
+discum = "^1.4.1"
+loguru = "^0.6.0"
+pytelegrambotapi = "^4.7.1"
 
 
 [build-system]
