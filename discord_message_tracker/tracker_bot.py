@@ -39,7 +39,7 @@ def set_token(message):
     db['token'] = message.text[6:].strip()
     tbot.send_message(message.chat.id, f'Your discord token: {db["token"]}')
     dbot = discum.Client(token=db['token'], log=False)  # Discord bot
-    dbot_run()
+    dbot_run(message.chat.id)
 
 
 @tbot.message_handler(commands=['channel'])
@@ -73,7 +73,7 @@ def check_stats(message):
                                        f"Channel id: {db['channel_id']}\nUser id: {db['user_id']}")
 
 
-def dbot_run():
+def dbot_run(chat_id):
     @dbot.gateway.command
     def send_soup(resp):
         if all([db['token'], db['channel_id'], db['user_id']]):
@@ -82,11 +82,11 @@ def dbot_run():
                 m = resp.parsed.auto()
                 if 'channel_id' in m and m['channel_id'] == db['channel_id'] and m['author']['id'] == db['user_id']:
                     logger.success('Received new message')
-                    tbot.send_message(389218482, f'New message from {m["author"]["username"]}' + '\n'
+                    tbot.send_message(chat_id, f'New message from {m["author"]["username"]}' + '\n'
                                                  'https://discord.com/channels/' +
                                                  m['guild_id'] + '/' + m['channel_id'])
         else:
-            tbot.send_message(389218482, 'Please configure bot before using')
+            tbot.send_message(chat_id, 'Please configure bot before using')
 
 
 tbot.polling(none_stop=True)
